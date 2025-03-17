@@ -36,7 +36,6 @@ const fetchLocation = async (input) => {
       `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&${query}`
     );
     const data = await res.json();
-    console.log("data: ", data)
     return {
       ip: data.ip || "",
       city: data.location.city || "",
