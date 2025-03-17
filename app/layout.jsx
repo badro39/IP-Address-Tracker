@@ -17,7 +17,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable}`} style={{maxHeight: "100dvh"}}>
+      <header>
+        <link rel="icon" href="/favicon-32x32.png" sizes="any" />
+      </header>
+      <body className={`${rubik.variable}`} style={{ maxHeight: "100dvh" }}>
         {children}
       </body>
     </html>

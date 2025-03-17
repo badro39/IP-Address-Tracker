@@ -26,11 +26,14 @@ const fetchIPAddress = async () => {
   }
 };
 
-const fetchLocation = async (ipAddress) => {
+const fetchLocation = async (input) => {
   try {
-    if (!ipAddress) return null;
+    if (!input) return null;
+
+    const isIP = isValidIP(input)
+    const query = isIP ? `ipAddress=${input}` : `domain=${input}`
     const res = await fetch(
-      `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&ipAddress=${ipAddress}`
+      `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&${query}`
     );
     const data = await res.json();
     return {
@@ -48,9 +51,15 @@ const fetchLocation = async (ipAddress) => {
   }
 };
 
+const isValidIP = (input) => {
+  const ipRegex =
+    /^(\d{1,3}\.){3}\d{1,3}$|^([a-fA-F0-9:]+:+)+[a-fA-F0-9]+$/;
+  return ipRegex.test(input);
+};
+
 export default function Home() {
   // State variables
-  const [ipAddress, setIpAddress] = useState(null);
+  const [input, setInput] = useState(null);
   const [position, setPosition] = useState(null);
   const [search, setSearch] = useState("");
   const [error, setError] = useState(false);
@@ -63,7 +72,7 @@ export default function Home() {
     const fetchData = async () => {
       const ip = await fetchIPAddress();
       if (ip) {
-        setIpAddress(ip);
+        setInput(ip);
         setSearch(ip);
       } else {
         setError(true)
@@ -79,26 +88,25 @@ export default function Home() {
 
   // Fetch location whenever IP address changes
   useEffect(() => {
-    if (ipAddress) {
-      //fetchLocation(ipAddress).then(setPosition);
+    if (input) {
       const position = async () => {
-        const pos = await fetchLocation(ipAddress);
+        const pos = await fetchLocation(input);
         setPosition(pos);
       };
       position();
     }
-  }, [ipAddress]);
+  }, [input]);
 
   // Handle Enter key in search
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") setIpAddress(search);
+    if (e.key === "Enter") setInput(search);
   };
 
   // Extract position details
   const { city, region, postalCode, timezone, lat, lng, isp } = position || {};
 
   const info = [
-    { name: "IP ADDRESS", value: ipAddress || "Fetching..." },
+    { name: "IP ADDRESS OR DOMAIN", value: input || "Fetching..." },
     {
       name: "LOCATION",
       value: `${city || "N/A"}, ${region || "N/A"} ${postalCode || ""}`,
@@ -128,7 +136,7 @@ export default function Home() {
                 backgroundColor: `var(--very-dark-gray)`,
                 cursor: "pointer",
               }}
-              onClick={() => setIpAddress(search)}
+              onClick={() => setInput(search)}
             ></i>
           </div>
         </div>
@@ -164,7 +172,7 @@ export default function Home() {
                 <p
                   className="m-0 fw-medium"
                   style={{
-                    fontSize: ".7rem",
+                    fontSize: ".65rem",
                     color: "var(--dark-gray)",
                     letterSpacing: ".1rem",
                   }}
