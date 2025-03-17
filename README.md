@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend Mentor - IP address tracker solution
 
-## Getting Started
+This is a solution to the [IP address tracker challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/ip-address-tracker-I8-0yYAH0). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-First, run the development server:
+## Table of contents
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+  
+## Overview
+### The challenge
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Users should be able to:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- View the optimal layout for each page depending on their device's screen size
+- See hover states for all interactive elements on the page
+- See their own IP address on the map on the initial page load
+- Search for any IP addresses or domains and see the key information and location
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Screenshot
+![image](https://github.com/user-attachments/assets/1f7dc63c-8dc8-4619-81ae-d7cd0380a1eb)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+### Links
 
-To learn more about Next.js, take a look at the following resources:
+- Solution URL: https://ip-address-tracker-psi-blond.vercel.app/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## My process
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Built with
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- React hooks
+- [Bootstrap](https://getbootstrap.com/) - CSS framework
+- [Next.js](https://nextjs.org/) - React framework
 
-## Deploy on Vercel
+### What I learned
+- Learned how to fetch data from external APIs, like ipify to get the IP address and geo.ipify for location data.
+- Learned how to use FlyTo() function in leaflet
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Useful resources
+- ipify API (Get IP Address) – https://www.ipify.org/
+- geo.ipify API (Get Location from IP) – https://geo.ipify.org/
+- React Leaflet (Interactive Maps in React) – https://react-leaflet.js.org/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Author
+
+- Website - [Djaballah Badr](https://portfolio-badro39.vercel.app/)
+- Frontend Mentor - [@badro39](https://www.frontendmentor.io/profile/badro39)
