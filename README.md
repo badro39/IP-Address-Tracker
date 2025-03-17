@@ -51,4 +51,4 @@ Users should be able to:
 ## Author
 
 - Website - [Djaballah Badr](https://portfolio-badro39.vercel.app/)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Frontend Mentor - [@badro39](https://www.frontendmentor.io/profile/badro39)
