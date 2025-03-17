@@ -37,6 +37,8 @@ Users should be able to:
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
+- React hooks
+- [Bootstrap](https://getbootstrap.com/) - CSS framework
 - [Next.js](https://nextjs.org/) - React framework
 
 ### What I learned
