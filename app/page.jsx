@@ -15,7 +15,7 @@ const Maps = dynamic(() => import("@/Components/Map"), { ssr: false });
 // Hooks
 import { useDeviceDetection } from "@/hooks/deviceDetection";
 
-// API Calls
+// Get User IP Address
 const fetchIPAddress = async () => {
   try {
     const res = await fetch("https://api64.ipify.org?format=json");
@@ -30,13 +30,15 @@ const fetchLocation = async (input) => {
   try {
     if (!input) return null;
 
-    const isIP = isValidIP(input)
-    const query = isIP ? `ipAddress=${input}` : `domain=${input}`
+    const isIP = isValidIP(input);
+    const query = isIP ? `ipAddress=${input}` : `domain=${input}`;
     const res = await fetch(
       `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.NEXT_PUBLIC_API_KEY}&${query}`
     );
     const data = await res.json();
+    console.log("data: ", data)
     return {
+      ip: data.ip || "",
       city: data.location.city || "",
       region: data.location.region || "",
       postalCode: data.location.postalCode || "",
@@ -52,8 +54,7 @@ const fetchLocation = async (input) => {
 };
 
 const isValidIP = (input) => {
-  const ipRegex =
-    /^(\d{1,3}\.){3}\d{1,3}$|^([a-fA-F0-9:]+:+)+[a-fA-F0-9]+$/;
+  const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$|^([a-fA-F0-9:]+:+)+[a-fA-F0-9]+$/;
   return ipRegex.test(input);
 };
 
@@ -75,12 +76,12 @@ export default function Home() {
         setInput(ip);
         setSearch(ip);
       } else {
-        setError(true)
-        const timeout = setTimeout(()=>{
-          setError(false)
-        }, 5000)
-        return () => clearTimeout(timeout)
-      };
+        setError(true);
+        const timeout = setTimeout(() => {
+          setError(false);
+        }, 5000);
+        return () => clearTimeout(timeout);
+      }
     };
 
     fetchData();
@@ -103,10 +104,10 @@ export default function Home() {
   };
 
   // Extract position details
-  const { city, region, postalCode, timezone, lat, lng, isp } = position || {};
+  const { ip, city, region, postalCode, timezone, lat, lng, isp } = position || {};
 
   const info = [
-    { name: "IP ADDRESS OR DOMAIN", value: input || "Fetching..." },
+    { name: "IP ADDRESS OR DOMAIN", value: ip || "Fetching..." },
     {
       name: "LOCATION",
       value: `${city || "N/A"}, ${region || "N/A"} ${postalCode || ""}`,
