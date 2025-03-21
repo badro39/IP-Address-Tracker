@@ -4,7 +4,7 @@
 import styles from "./page.module.css";
 
 // React hooks
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // Next Components
 import dynamic from "next/dynamic";
@@ -99,27 +99,34 @@ export default function Home() {
 
   // Handle Enter key in search
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") setInput(search);
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setInput(search);
+    }
   };
 
   // Extract position details
-  const { ip, city, region, postalCode, timezone, lat, lng, isp } = position || {};
+  const { ip, city, region, postalCode, timezone, lat, lng, isp } =
+    position || {};
 
-  const info = [
-    { name: "IP ADDRESS OR DOMAIN", value: ip || "Fetching..." },
-    {
-      name: "LOCATION",
-      value: `${city || "N/A"}, ${region || "N/A"} ${postalCode || ""}`,
-    },
-    { name: "TIMEZONE", value: timezone ? `UTC ${timezone}` : "N/A" },
-    { name: "ISP", value: isp || "N/A" },
-  ];
+  const info = useMemo(
+    () => [
+      { name: "IP ADDRESS OR DOMAIN", value: ip || "Fetching..." },
+      {
+        name: "LOCATION",
+        value: `${city || "N/A"}, ${region || "N/A"} ${postalCode || ""}`,
+      },
+      { name: "TIMEZONE", value: timezone ? `UTC ${timezone}` : "N/A" },
+      { name: "ISP", value: isp || "N/A" },
+    ],
+    [ip, city, region, postalCode, timezone, isp]
+  );
 
   return (
     <div>
       <header className={styles.header}>
         <div className="w-100 text-center">
-          <h2 className="text-light py-3">IP Address Tracker</h2>
+          <h1 className="text-light py-3">IP Address Tracker</h1>
           <div className="d-flex m-auto col-lg-4 col-md-6 col-sm-8 col-9">
             <input
               type="search"

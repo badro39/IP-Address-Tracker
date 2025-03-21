@@ -1,11 +1,1 @@
-.header {
-  position: relative;
-  height: 35dvh;
-  background: url("/pattern-bg-desktop.png") center/cover no-repeat;
-}
-
-@media screen and (max-width: 375px) {
-  .header {
-    background: url("/pattern-bg-mobile.png") center/cover no-repeat;
-  }
-}
+.header{position:relative;height:35dvh;background:url("/pattern-bg-desktop.png") center/cover no-repeat}@media screen and (max-width:375px){.header{background:url("/pattern-bg-mobile.png") center/cover no-repeat}}
